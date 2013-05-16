@@ -14,6 +14,11 @@ public abstract class SStar extends SObject {
 	private int consumed;
 	private boolean nova = false;
 	
+	public SStar(double[] pos, double radius, double massNew){
+		super(pos, radius, massNew);
+		setFillColor(Color.YELLOW)
+	}
+	
 	//Methods
 	
 	public int getConsumed() {
@@ -29,3 +34,5 @@ public abstract class SStar extends SObject {
 			isNova = true;
 		}
 	}
+	
+}

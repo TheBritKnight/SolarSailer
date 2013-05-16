@@ -23,6 +23,7 @@ public abstract class SObject extends GOval{
 		position = pos;
 		velocity = new double[] {0, 0};
 		mass = massNew;
+		setFilled(true);
 	}
 
 	//Getters and Setters	
@@ -46,9 +47,11 @@ public abstract class SObject extends GOval{
 		velocity[0] = x;
 		velocity[1] = y;
 	}
-	public void setPosition(double x, double y) {
+	public void setLocation(double x, double y) {
 		position[0] = x;
 		position[1] = y;
+		
+		super.setLocation(position[0]-radius, position[1]-radius);
 	}
 	public void setMass(double m){
 		if(m != 0){mass = m;}
