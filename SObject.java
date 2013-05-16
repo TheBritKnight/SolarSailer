@@ -18,14 +18,14 @@ public abstract class SObject extends GOval{
 	private ArrayList<double[]> forces;
 
 	//Constructor
-	public SObject(double[] pos, double radius) {
-		super(pos[0]*2,pos[1]*2);
+	public SObject(double[] pos, double radius, double massNew) {
+		super((radius * 2), (radius * 2), pos[0], pos[1]);
 		position = pos;
 		velocity = new double[] {0, 0};
+		mass = massNew;
 	}
 
-	//Methods get
-	
+	//Getters and Setters	
 	public double[] getVel() {
 		return velocity;
 	}	
@@ -41,14 +41,14 @@ public abstract class SObject extends GOval{
 	public ArrayList<double[]> getForces(){
 		return forces;
 	}
-	
-	//Methods Set
-	
-	public void setVel(double[] vel) {
-		velocity = vel;
+
+	public void setVel(double x, double y) {
+		velocity[0] = x;
+		velocity[1] = y;
 	}
-	public void setPosition(double[] newPosition) {
-		position = newPosition;
+	public void setPosition(double x, double y) {
+		position[0] = x;
+		position[1] = y;
 	}
 	public void setMass(double m){
 		if(m != 0){mass = m;}
@@ -59,8 +59,38 @@ public abstract class SObject extends GOval{
 	
 	//Methods: act, etc.
 	
+	public void addForce(double x, double y){
+		double[] newForce = new double[]{x, y};
+		forces.add(newForce);
+	}
+	
 	public void act() {
-		//code to be added
+		actForces();
+		updateLocation();
+	}
+	
+	private void actForces(){
+		for(double[] force : forces){
+			for(int i = 0; i < force.length; i++){
+				velocity[i] = force[i]/mass;
+			}//End inner for
+		}//End for
+	}
+	
+	private void updateLocation(){
+		for(double v : velocity){
+			setLocation(getPosition()[0]+velocity[0], getPosition()[1] + velocity[1]);
+		}//End for
+	}
+	
+	public void bounceX(){
+		double[] vels = getVel();
+		setVel(-vels[0], vels[1]);
+	}
+	
+	public void bounceY(){
+		double[] vels = getVel();
+		setVel(vels[0], -vels[1]);
 	}
 	
 }
