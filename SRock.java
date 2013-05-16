@@ -4,8 +4,8 @@ import java.acm.Color
 
 public class SRock extends SObject{
 	
-	public SRock(double[] pos, double radius, double newMass){
-		super(pos, radius, newMass);
+	public SRock(int x, int y, double radius, double newMass){
+		super(x, y, radius, newMass);
 		setColor(Color.DARK_GRAY);
 	}
 	

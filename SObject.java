@@ -14,12 +14,12 @@ public abstract class SObject extends GOval{
 	private double mass;
 	private double radius;
 	private double[] velocity;
-	private double[] position;
+	private int[] position;
 	private ArrayList<double[]> forces;
 
 	//Constructor
 	public SObject(double[] pos, double radius, double massNew) {
-		super((radius * 2), (radius * 2), pos[0], pos[1]);
+		super((radius * 2), (radius * 2), x, y);
 		position = pos;
 		velocity = new double[] {0, 0};
 		mass = massNew;
@@ -47,7 +47,7 @@ public abstract class SObject extends GOval{
 		velocity[0] = x;
 		velocity[1] = y;
 	}
-	public void setLocation(double x, double y) {
+	public void setLocation(int x, int y) {
 		position[0] = x;
 		position[1] = y;
 		

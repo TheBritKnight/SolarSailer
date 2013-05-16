@@ -14,8 +14,8 @@ public abstract class SStar extends SObject {
 	private int consumed;
 	private boolean nova = false;
 	
-	public SStar(double[] pos, double radius, double massNew){
-		super(pos, radius, massNew);
+	public SStar(int x, int y, double radius, double massNew){
+		super(x, y, radius, massNew);
 		setFillColor(Color.YELLOW)
 	}
 	
