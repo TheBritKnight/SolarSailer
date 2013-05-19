@@ -1,11 +1,14 @@
-import acm.program.*;
+import java.util.ArrayList;
 
+import acm.program.GraphicsProgram;
+
+@SuppressWarnings("serial")
 public class SUniverse extends GraphicsProgram{
 	
 	public static final int APPLICATION_WIDTH = 1000;
 	public static final int APPLICATION_HEIGHT = 1000;
 	
-	ArrayList<SObject> objs = new ArrayList<SObject>;
+	ArrayList<SObject> objs = new ArrayList<SObject>();
 	
 	public void init(){
 		SRock rock = new SRock(500, 500, 100, 100);

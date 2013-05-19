@@ -1,6 +1,4 @@
-package universe;
-
-import java.acm.Color
+import java.awt.Color;
 
 public class SRock extends SObject{
 	

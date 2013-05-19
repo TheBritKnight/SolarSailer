@@ -1,13 +1,12 @@
-package universe;
-
-import java.util.Arraylist;
-
-import acm.graphics/GOval;
+import java.awt.Color;
 
 public abstract class SStar extends SObject {
 
 	/**
 	*Class for Stars
+	*
+	*Runner class responsibilities:
+	*
 	*/
 	
 	//Instance Variables
@@ -16,7 +15,7 @@ public abstract class SStar extends SObject {
 	
 	public SStar(int x, int y, double radius, double massNew){
 		super(x, y, radius, massNew);
-		setFillColor(Color.YELLOW)
+		setFillColor(Color.YELLOW);
 	}
 	
 	//Methods
@@ -29,10 +28,19 @@ public abstract class SStar extends SObject {
 		return nova;
 	}
 	
-	private boolean goNova() {
+	private boolean checkGoNova() {
 		if (consumed > 5) {
-			isNova = true;
+			nova = true;
+		} else {
+			nova = false;
 		}
+		return nova;
+	}
+	
+	public void act(){
+		actForces();
+		updateLocation();
+		checkGoNova();
 	}
 	
 }

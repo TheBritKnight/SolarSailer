@@ -1,9 +1,6 @@
-package universe;
-
 import java.util.ArrayList;
 import acm.graphics.*;
 
-@SuppressWarnings("serial")
 public abstract class SObject extends GOval{
 	
 	/**
@@ -14,13 +11,11 @@ public abstract class SObject extends GOval{
 	private double mass;
 	private double radius;
 	private double[] velocity;
-	private int[] position;
 	private ArrayList<double[]> forces;
 
 	//Constructor
-	public SObject(double[] pos, double radius, double massNew) {
-		super((radius * 2), (radius * 2), x, y);
-		position = pos;
+	public SObject(int x, int y, double radius, double massNew) {
+		super((radius * 2), (radius * 2), x-radius, y-radius);
 		velocity = new double[] {0, 0};
 		mass = massNew;
 		setFilled(true);
@@ -30,9 +25,6 @@ public abstract class SObject extends GOval{
 	public double[] getVel() {
 		return velocity;
 	}	
-	public double[] getPosition() {
-		return position;
-	}
 	public double getRadius() {
 		return radius;
 	}
@@ -48,10 +40,7 @@ public abstract class SObject extends GOval{
 		velocity[1] = y;
 	}
 	public void setLocation(int x, int y) {
-		position[0] = x;
-		position[1] = y;
-		
-		super.setLocation(position[0]-radius, position[1]-radius);
+		super.setLocation(x-radius, y-radius);
 	}
 	public void setMass(double m){
 		if(m != 0){mass = m;}
@@ -72,7 +61,7 @@ public abstract class SObject extends GOval{
 		updateLocation();
 	}
 	
-	private void actForces(){
+	protected void actForces(){
 		for(double[] force : forces){
 			for(int i = 0; i < force.length; i++){
 				velocity[i] = force[i]/mass;
@@ -80,18 +69,34 @@ public abstract class SObject extends GOval{
 		}//End for
 	}
 	
-	private void updateLocation(){
-		for(double v : velocity){
-			setLocation(getPosition()[0]+velocity[0], getPosition()[1] + velocity[1]);
-		}//End for
+	protected void updateLocation(){
+		setLocation(getX()+velocity[0], getY() + velocity[1]);
 	}
 	
-	public void bounceX(){
+	/**
+	 * Called by runner class on collision with other object
+	 * 
+	 * @param onXSide if the impact occured on the left or right of the object
+	 * @param onYSide if the impact in on the top or bottom of the object
+	 * @return true if the other object is to be removed (i.e. if this is a SStar), false otherwise
+	 */
+	public boolean impact(boolean onXSide, boolean onYSide){
+		if(onXSide){
+			bounceX();
+		}
+		if(onYSide){
+			bounceY();
+		}
+		
+		return false;
+	}
+	
+	private void bounceX(){
 		double[] vels = getVel();
 		setVel(-vels[0], vels[1]);
 	}
 	
-	public void bounceY(){
+	private void bounceY(){
 		double[] vels = getVel();
 		setVel(vels[0], -vels[1]);
 	}
