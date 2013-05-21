@@ -39,7 +39,6 @@ public abstract class SStar extends SObject {
 	
 	public void act(){
 		actForces();
-		updateLocation();
 		checkGoNova();
 	}
 	

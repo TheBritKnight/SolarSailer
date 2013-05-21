@@ -1,6 +1,8 @@
 All our work is licensed under a Creative Commons Attribution Share-Alike license.
 CC-BY-SA
 
+The Vector Class in vector.java was written by our friend Max Allen and is licensed under CC BY-SA as well.
+
 That being said, we do use the JTF ACM library. Not being lawyers, we are not sure whether this is technically open source, but it seems close.
 The license on the included acm library can be found here (http://jtf.acm.org/license.pdf)
 

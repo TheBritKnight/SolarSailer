@@ -11,14 +11,15 @@ public abstract class SObject extends GOval{
 	private double mass;
 	private double radius;
 	private double[] velocity;
-	private ArrayList<double[]> forces;
+	private ArrayList<double[]> forces = new ArrayList<double[]>();
 
 	//Constructor
 	public SObject(int x, int y, double radius, double massNew) {
-		super((radius * 2), (radius * 2), x-radius, y-radius);
+		super( x, y, (radius * 2), (radius * 2));
 		velocity = new double[] {0, 0};
 		mass = massNew;
 		setFilled(true);
+		setVisible(true);
 	}
 
 	//Getters and Setters	
@@ -58,7 +59,6 @@ public abstract class SObject extends GOval{
 	
 	public void act() {
 		actForces();
-		updateLocation();
 	}
 	
 	protected void actForces(){
@@ -67,10 +67,6 @@ public abstract class SObject extends GOval{
 				velocity[i] = force[i]/mass;
 			}//End inner for
 		}//End for
-	}
-	
-	protected void updateLocation(){
-		setLocation(getX()+velocity[0], getY() + velocity[1]);
 	}
 	
 	/**
