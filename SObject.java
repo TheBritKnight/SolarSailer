@@ -40,8 +40,16 @@ public abstract class SObject extends GOval{
 		velocity[0] = x;
 		velocity[1] = y;
 	}
-	public void setLocation(int x, int y) {
+	//Sets Location at Center
+	public void setLocation(double x, double y) {
 		super.setLocation(x-radius, y-radius);
+	}
+	//Gets location of center
+	public double getX(){
+		return super.getX()-radius;
+	}
+	public double getY(){
+		return super.getY()-radius;
 	}
 	public void setMass(double m){
 		if(m != 0){mass = m;}
@@ -87,12 +95,12 @@ public abstract class SObject extends GOval{
 		return false;
 	}
 	
-	private void bounceX(){
+	public void bounceX(){
 		double[] vels = getVel();
 		setVel(-vels[0], vels[1]);
 	}
 	
-	private void bounceY(){
+	public void bounceY(){
 		double[] vels = getVel();
 		setVel(vels[0], -vels[1]);
 	}
