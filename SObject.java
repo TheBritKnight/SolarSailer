@@ -8,15 +8,23 @@ public abstract class SObject extends GOval{
 	*/
 
 	//Instance Variables
-	private double mass;
+	private long mass;
 	private double radius;
 	private double[] velocity;
 	private ArrayList<double[]> forces = new ArrayList<double[]>();
 
 	//Constructor
-	public SObject(int x, int y, double radius, double massNew) {
-		super( x, y, (radius * 2), (radius * 2));
-		velocity = new double[] {0, 0};
+	/**
+	 * 
+	 * @param x x position
+	 * @param y y position
+	 * @param radius The radius of the object
+	 * @param massNew the mass of the object
+	 */
+	public SObject(int x, int y, double rad, long massNew, double xVel, double yVel) {
+		super( x, y, (rad * 2), (rad * 2));
+		radius = rad;
+		velocity = new double[] {xVel, yVel};
 		mass = massNew;
 		setFilled(true);
 		setVisible(true);
@@ -42,16 +50,16 @@ public abstract class SObject extends GOval{
 	}
 	//Sets Location at Center
 	public void setLocation(double x, double y) {
-		super.setLocation(x-radius, y-radius);
+		super.setLocation(x, y);
 	}
 	//Gets location of center
 	public double getX(){
-		return super.getX()-radius;
+		return super.getX();
 	}
 	public double getY(){
-		return super.getY()-radius;
+		return super.getY();
 	}
-	public void setMass(double m){
+	public void setMass(long m){
 		if(m != 0){mass = m;}
 	}
 	public void setRadius(double r){
@@ -72,7 +80,7 @@ public abstract class SObject extends GOval{
 	protected void actForces(){
 		for(double[] force : forces){
 			for(int i = 0; i < force.length; i++){
-				velocity[i] = force[i]/mass;
+				velocity[i] += force[i]/mass;
 			}//End inner for
 		}//End for
 	}
